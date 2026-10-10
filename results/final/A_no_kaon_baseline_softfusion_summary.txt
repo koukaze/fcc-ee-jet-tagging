@@ -1,0 +1,91 @@
+Soft-fusion baseline090 + UDS pair-feature ablation held-out test summary
+
+Test jets: 180000
+Class counts:
+  b: 29945
+  c: 30003
+  s: 29775
+  u: 30083
+  d: 30222
+  g: 29972
+
+Baseline checkpoint epoch: 42 best_loss: 0.9123208708233304
+UDS checkpoint epoch: 45 best_loss: 0.9552939942170788
+UDS pair feature set: no_kaon
+UDS pair features: dtheta, sin_dphi, cos_dphi, log_deltaR, log_p_i, log_p_j, charge_i_times_charge_j, same_nonzero_charge, opposite_charge, one_hot_type_i_cpf, one_hot_type_i_npf, one_hot_type_i_sv, one_hot_type_i_v0, one_hot_type_j_cpf, one_hot_type_j_npf, one_hot_type_j_sv, one_hot_type_j_v0
+
+Baseline performance:
+  overall: 61.2806%
+  macro:   61.3530%
+  b: 91.0670%
+  c: 80.1853%
+  s: 64.2821%
+  u: 38.0647%
+  d: 22.7450%
+  g: 71.7737%
+
+Fused performance:
+  overall: 62.4761%
+  macro:   62.5274%
+  b: 91.0736%
+  c: 80.1220%
+  s: 60.3795%
+  u: 35.9173%
+  d: 36.6025%
+  g: 71.0697%
+
+Delta fused - baseline [percentage points]:
+  overall: +1.1956
+  macro:   +1.1745
+  b: +0.0067
+  c: -0.0633
+  s: -3.9026
+  u: -2.1474
+  d: +13.8575
+  g: -0.7040
+
+Fused probability sum check:
+  min:  0.99999970
+  max:  1.00000024
+  mean: 1.00000000
+
+p_light summary:
+  min:  0.00000002
+  max:  0.99949276
+  mean: 0.50767285
+
+Baseline confusion matrix counts (rows=true, cols=pred):
+               b          c          s          u          d          g
+   b      27270       1926         75         39         35        600
+   c        978      24058       2028        641        557       1741
+   s         70        659      19140       3157       2817       3932
+   u         68        548       7755      11451       5970       4291
+   d         73        534       8397      10037       6874       4307
+   g        894       1425       2953       2038       1150      21512
+
+Fused confusion matrix counts (rows=true, cols=pred):
+               b          c          s          u          d          g
+   b      27272       1927         62         48         38        598
+   c        979      24039       1672        731        861       1721
+   s         69        660      17978       3222       4069       3777
+   u         68        517       6063      10805       8524       4106
+   d         72        528       6917       7544      11062       4099
+   g        894       1429       2543       1737       2068      21301
+
+Baseline confusion matrix row-normalised [%] (rows=true, cols=pred):
+               b          c          s          u          d          g
+   b      91.07       6.43       0.25       0.13       0.12       2.00
+   c       3.26      80.19       6.76       2.14       1.86       5.80
+   s       0.24       2.21      64.28      10.60       9.46      13.21
+   u       0.23       1.82      25.78      38.06      19.85      14.26
+   d       0.24       1.77      27.78      33.21      22.75      14.25
+   g       2.98       4.75       9.85       6.80       3.84      71.77
+
+Fused confusion matrix row-normalised [%] (rows=true, cols=pred):
+               b          c          s          u          d          g
+   b      91.07       6.44       0.21       0.16       0.13       2.00
+   c       3.26      80.12       5.57       2.44       2.87       5.74
+   s       0.23       2.22      60.38      10.82      13.67      12.69
+   u       0.23       1.72      20.15      35.92      28.33      13.65
+   d       0.24       1.75      22.89      24.96      36.60      13.56
+   g       2.98       4.77       8.48       5.80       6.90      71.07

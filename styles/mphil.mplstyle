@@ -1,0 +1,37 @@
+# MPhil style for matplotlib
+# Based on the s1_sol mphil.mplstyle
+
+# Figure
+figure.figsize: 8, 5
+
+# Font
+font.family: serif
+font.size: 12
+
+# Axes
+axes.labelsize: 14
+axes.titlesize: 14
+axes.grid: False
+axes.spines.top: False
+axes.spines.right: False
+
+# Grid
+grid.alpha: 0.3
+grid.linestyle: --
+
+# Lines
+lines.linewidth: 1.5
+
+# Legend
+legend.fontsize: 11
+legend.framealpha: 0.8
+
+# Ticks
+xtick.labelsize: 11
+ytick.labelsize: 11
+xtick.direction: in
+ytick.direction: in
+
+# Savefig
+savefig.dpi: 300
+savefig.bbox: tight

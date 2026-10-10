@@ -1,0 +1,28 @@
+# Local environments and generated Python files
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+build/
+dist/
+.DS_Store
+.env
+.env.*
+
+# Simulation inputs and training outputs
+data/
+*.root
+*.pth
+*.pt
+*.ckpt
+checkpoints/
+runs/
+plots/
+outputs/
+logs/
+
+# Large per-jet metadata
+results/final/test_prediction_metadata.npz

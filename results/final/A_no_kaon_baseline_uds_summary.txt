@@ -1,0 +1,42 @@
+UDS pair-feature ablation specialist baseline090 held-out test summary
+
+Run name: E_pair_no_kaon
+Architecture: UDSSpecialistPairBiasTransformer
+Architecture description: shared pair-feature MLP produces an additive per-head attention bias B_ij,head for all transformer encoder layers.
+Pair feature set: no_kaon
+Pair features: dtheta, sin_dphi, cos_dphi, log_deltaR, log_p_i, log_p_j, charge_i_times_charge_j, same_nonzero_charge, opposite_charge, one_hot_type_i_cpf, one_hot_type_i_npf, one_hot_type_i_sv, one_hot_type_i_v0, one_hot_type_j_cpf, one_hot_type_j_npf, one_hot_type_j_sv, one_hot_type_j_v0
+Hyperparameters:
+  d_model: 128
+  nhead: 8
+  n_encoder_layers: 3
+  dropout: 0.1
+  lr: 0.005
+  weight_decay: 0.0
+  final batch size used: 1024
+  pair_hidden_dim: 32
+
+Train UDS jets: 420188
+Eval UDS jets:  89732
+Test UDS jets:  90080
+
+Best epoch: 45
+Best evaluation loss: 0.9552939942170788
+Best evaluation accuracy: 0.5108768332367495
+
+Overall 3-class UDS test accuracy: 50.9469%
+Per-class test accuracy:
+  s: 68.8027% (29775 jets)
+  u: 40.9401% (30083 jets)
+  d: 43.3161% (30222 jets)
+
+Confusion matrix counts (rows=true, cols=pred):
+               s          u          d
+   s      20486       3946       5343
+   u       7413      12316      10354
+   d       8391       8740      13091
+
+Confusion matrix row-normalised [%] (rows=true, cols=pred):
+               s          u          d
+   s      68.80      13.25      17.94
+   u      24.64      40.94      34.42
+   d      27.76      28.92      43.32
