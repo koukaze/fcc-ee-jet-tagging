@@ -2,8 +2,6 @@
 
 Transformer-based classification of six jet flavours in FCC-ee simulations, with a pairwise-attention specialist for light-flavour separation.
 
-**Peijing Pang · University of Cambridge · MPhil in Data Intensive Science research project**
-
 The model combines a six-class DeepJetTransformer-style baseline with an `s/u/d` specialist. Particle-pair geometry, momentum, charge and token-type features enter the specialist's attention logits. Soft fusion redistributes the baseline's light-flavour probability among `s`, `u` and `d`.
 
 ## Results
