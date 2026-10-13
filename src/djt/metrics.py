@@ -134,10 +134,13 @@ def roc_curve_xy(y_signal: np.ndarray, score: np.ndarray) -> tuple[np.ndarray, n
     n_background = len(y_sorted) - n_signal
     if n_signal == 0 or n_background == 0:
         return np.array([0.0, 1.0]), np.array([0.0, 1.0])
-    tp = np.cumsum(y_sorted)
-    fp = np.cumsum(~y_sorted)
-    signal_eff = np.r_[0.0, tp / n_signal, 1.0]
-    background_eff = np.r_[0.0, fp / n_background, 1.0]
+    # A threshold includes all observations with the same score.
+    sorted_scores = score[order]
+    threshold_indices = np.r_[np.flatnonzero(np.diff(sorted_scores)), len(score) - 1]
+    tp = np.cumsum(y_sorted)[threshold_indices]
+    fp = np.cumsum(~y_sorted)[threshold_indices]
+    signal_eff = np.r_[0.0, tp / n_signal]
+    background_eff = np.r_[0.0, fp / n_background]
     return signal_eff, background_eff
 
 

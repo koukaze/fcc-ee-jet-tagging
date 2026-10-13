@@ -4,6 +4,8 @@ Transformer-based classification of six jet flavours in FCC-ee simulations, with
 
 The model combines a six-class DeepJetTransformer-style baseline with an `s/u/d` specialist. Particle-pair geometry, momentum, charge and token-type features enter the specialist's attention logits. Soft fusion redistributes the baseline's light-flavour probability among `s`, `u` and `d`.
 
+The baseline implementation is adapted from [DeepJetFCC](https://github.com/Edler1/DeepJetFCC), accompanying Blekman et al., [*Tagging more quark jet flavours at FCC-ee at 91 GeV with a transformer-based neural network*](https://doi.org/10.1140/epjc/s10052-025-13785-y). The pairwise-attention design is inspired by [Particle Transformer](https://proceedings.mlr.press/v162/qu22b.html). Upstream code attribution and license terms are documented in [Third-party notices](THIRD_PARTY_NOTICES.md).
+
 ## Results
 
 The saved comparison contains **180,000 simulated jets** in the class order `b, c, s, u, d, g`.

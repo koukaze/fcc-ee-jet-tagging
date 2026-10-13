@@ -71,7 +71,7 @@ python scripts/train_uds.py \
 
 Both trainers write `checkpoint_latest.pth`, `checkpoint_best_loss.pth` and epoch metrics in their output directory. The UDS specialist splits the full sample first, then selects the true `s/u/d` jets within each split. Training uses evaluation loss for checkpoint selection.
 
-Use `--resume` with the same output directory to continue a run. Use `--resume --resume-path PATH` to select a checkpoint explicitly. Checkpoint files contain model and optimizer state; load only checkpoints from a trusted source.
+Use `--resume` with the same output directory to continue a run. Use `--resume --resume-path PATH` to select a checkpoint explicitly. A requested resume checkpoint must exist; otherwise the command exits without starting training. Checkpoint files contain model and optimizer state; load only checkpoints from a trusted source.
 
 ## Evaluate checkpoints
 

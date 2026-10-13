@@ -695,6 +695,9 @@ def main() -> None:
     metrics_path = output_dir / "metrics.csv"
     resume_path = Path(args.resume_path) if args.resume_path else output_dir / "checkpoint_latest.pth"
 
+    if args.resume and not resume_path.is_file():
+        raise SystemExit(f"Cannot resume: checkpoint not found: {resume_path}")
+
     existing_run = metrics_path.exists() or resume_path.exists()
     if existing_run and not args.resume:
         if not args.overwrite:
@@ -766,7 +769,7 @@ def main() -> None:
 
     start_epoch = 1
     best_loss = float("inf")
-    if args.resume and resume_path.exists():
+    if args.resume:
         start_epoch, best_loss = load_checkpoint(resume_path, model, optimizer, scheduler, device)
         print(f"Resumed from {resume_path} at epoch {start_epoch}; best_loss={best_loss:.6f}")
 

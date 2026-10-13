@@ -79,3 +79,16 @@ def test_mismatched_baseline_rows_are_rejected(tmp_path):
              class_names=np.array(analysis.CLASS_NAMES), uds_class_names=np.array(analysis.UDS_CLASS_NAMES))
     with pytest.raises(ValueError, match='different baseline scores'):
         analysis.load_results(tmp_path)
+
+
+@pytest.mark.parametrize('scores', [np.ones(8), np.array([.8, .5, .8, .2, .5, .2, .8, .5])])
+def test_roc_groups_equal_scores_independently_of_row_order(scores):
+    from sklearn.metrics import roc_curve
+    from djt.metrics import roc_curve_xy
+
+    labels = np.array([True, False, False, True, True, False, True, False])
+    expected_fpr, expected_tpr, _ = roc_curve(labels, scores, drop_intermediate=False)
+    for order in (np.arange(8), np.arange(8)[::-1], np.random.default_rng(1123).permutation(8)):
+        tpr, fpr = roc_curve_xy(labels[order], scores[order])
+        np.testing.assert_array_equal(tpr, expected_tpr)
+        np.testing.assert_array_equal(fpr, expected_fpr)

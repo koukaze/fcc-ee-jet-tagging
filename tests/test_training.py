@@ -97,3 +97,24 @@ def test_optimizer_checkpoint_roundtrip(tmp_path, module):
         torch.nn.functional.cross_entropy(current_model(inputs), labels).backward()
         current_optimizer.step()
     torch.testing.assert_close(restored(inputs), model(inputs))
+
+
+@pytest.mark.parametrize("module", ["baseline", "pair_bias", "pair_bias_base"])
+@pytest.mark.parametrize("explicit_path", [False, True])
+def test_missing_resume_checkpoint_stops_before_training(tmp_path, module, explicit_path):
+    repo = Path(__file__).resolve().parents[1]
+    metrics = tmp_path / "metrics.csv"
+    original = "epoch,train_loss\n1,0.5\n"
+    metrics.write_text(original)
+    command = [sys.executable, "-m", f"djt.{module}", "--resume",
+               "--output-dir", str(tmp_path), "--root-files", str(tmp_path / "missing.root")]
+    if explicit_path:
+        command += ["--resume-path", str(tmp_path / "missing.pth")]
+    environment = {**os.environ, "PYTHONPATH": str(repo / "src"), "PYTHONDONTWRITEBYTECODE": "1"}
+    result = subprocess.run(command, cwd=repo, env=environment, capture_output=True,
+                            text=True, timeout=60)
+    assert result.returncode != 0
+    assert "Cannot resume: checkpoint not found:" in result.stderr
+    assert "Loading" not in result.stdout
+    assert metrics.read_text() == original
+    assert not list(tmp_path.glob("*.pth"))
